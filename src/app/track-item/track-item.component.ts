@@ -7,7 +7,7 @@ import {StoreConfig} from "../models/StoreConfig";
 import {NgIf} from "@angular/common";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
-import {ColorSizes, NewItemInfo, Size} from "../models/NewItemInfo";
+import {ColorSizes, NewItemInfo, Size, SizePrices} from "../models/NewItemInfo";
 import {ItemService} from "../item.service";
 import {DialogModule} from "primeng/dialog";
 import {DynamicDialogRef} from "primeng/dynamicdialog";
@@ -42,7 +42,7 @@ export class TrackItemComponent implements AfterViewInit {
     store: new FormControl<StoreConfig | null>(null, Validators.required),
     itemId: new FormControl<string | null>(null, Validators.required),
     color: new FormControl<ColorSizes | null>(null),
-    size: new FormControl<Size | null>(null),
+    size: new FormControl<SizePrices | null>(null),
     price: new FormControl<number | null>(null, [
       Validators.required,
       Validators.min(10),
@@ -62,21 +62,21 @@ export class TrackItemComponent implements AfterViewInit {
   }
 
   trackItem() {
-    var addItem: AddItem = {
+    const addItem: AddItem = {
       externalId: this.addItemForm.controls.itemId.value as string,
       desiredPrice: this.addItemForm.controls.price.value as number,
       store: (this.addItemForm.controls.store.value as StoreConfig).enumName as string,
-      metadata: this.addItemForm.controls.color.value == null || this.addItemForm.controls.size.value == null  ? null : {
+      metadata: this.addItemForm.controls.color.value == null || this.addItemForm.controls.size.value == null ? null : {
         color: {
           id: this.addItemForm.controls.color.value?.color.id,
           name: this.addItemForm.controls.color.value?.color.name
         },
         size: {
-          id: this.addItemForm.controls.size.value?.id,
-          name: this.addItemForm.controls.size.value?.name
+          id: this.addItemForm.controls.size.value?.size.id,
+          name: this.addItemForm.controls.size.value?.size.name
         }
       }
-    }
+    };
 
     this.itemService.addItem(addItem).subscribe(
       {
@@ -86,7 +86,7 @@ export class TrackItemComponent implements AfterViewInit {
           this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to track item'});
           this.ref.close();
         },
-        complete: () =>  {
+        complete: () => {
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully tracked item'});
           this.ref.close();
         }
