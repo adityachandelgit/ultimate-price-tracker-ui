@@ -1,0 +1,15 @@
+<p-toolbar class="header_toolbar" styleClass="bg-gray-900 shadow-2" [style]="{'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
+  <ng-template pTemplate="start">
+    <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+  </ng-template>
+  <ng-template pTemplate="center">
+    <div class="flex flex-wrap align-items-center gap-3">
+      <button [routerLink]="['home']" class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-home text-3xl"></i></button>
+      <button (click)="show()" class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-plus-circle text-3xl"></i></button>
+      <button [routerLink]="['settings']" class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-cog text-3xl"></i></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div></div>
+  </ng-template>
+</p-toolbar>

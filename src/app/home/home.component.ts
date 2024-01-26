@@ -5,6 +5,7 @@ import {StoreConfig} from "../models/StoreConfig";
 import {ApiConfigService} from "../api-config.service";
 import {Item} from "../models/Item";
 import {DatePipe, SlicePipe} from "@angular/common";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import {DatePipe, SlicePipe} from "@angular/common";
   imports: [
     TableModule,
     DatePipe,
-    SlicePipe
+    SlicePipe,
+    ToastModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

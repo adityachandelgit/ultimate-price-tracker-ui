@@ -2,9 +2,14 @@
 @import "primeng/resources/themes/mdc-light-deeppurple/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
 
 html {
   font-size: 14px;
   font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
 }

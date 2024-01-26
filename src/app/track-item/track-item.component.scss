@@ -1,0 +1,21 @@
+.parent > div {
+  display: inline-block;
+  width: 350px;
+  padding: 10px;
+}
+
+.right {
+  position: absolute;
+}
+
+
+.inner > * {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.btn-search {
+  margin-left: 12px;
+}
+
+

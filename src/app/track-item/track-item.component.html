@@ -1,0 +1,68 @@
+<!--<form [formGroup]="addItemForm">
+
+  <div class="aditya-container">
+    <div class="horizontal">
+      <div class="vertical">
+        <p-dropdown formControlName="store" [options]="storeConfigs" optionLabel="name" placeholder="Select a store" (onChange)="onChange()"></p-dropdown>
+        <div class="horizontal">
+          <input type="text" pInputText formControlName="itemId" *ngIf="addItemForm.controls.store.value != null"/>
+          <p-button pRipple label="Search" *ngIf="addItemForm.controls.store.value != null && addItemForm.controls.itemId.value != null" (click)="getNewItemInfo()"></p-button>
+        </div>
+        <p-dropdown formControlName="color" *ngIf="newItemInfo?.imageUrl != null && hasColorSize" [options]="newItemInfo.metadata?.colorSizes" optionLabel="color.name" placeholder="Select color"></p-dropdown>
+        <p-dropdown formControlName="size" *ngIf="addItemForm.controls.color.value != null" [options]="getSizes()" optionLabel="size.name" placeholder="Select size"></p-dropdown>
+        <input type="text" pInputText formControlName="price" *ngIf="showPrice()"/>
+        <p-button type="submit" [disabled]="!addItemForm.valid">Submit</p-button>
+      </div>
+      <img class='resize_fit_center' *ngIf="newItemInfo" [src]="getImage()" style="max-width:250px;max-height:250px;width:auto;height:auto;"/>
+    </div>
+
+  </div>
+
+</form>-->
+
+<!--<div class="parent">
+  <div class="left">
+    <div class="full">
+      <p-dropdown formControlName="store" [options]="storeConfigs" optionLabel="name" placeholder="Select a store" (onChange)="onChange()" [style]="{'width':'100%','margin-bottom': '10px'}"></p-dropdown>
+      <div>
+        <input type="text" pInputText/>
+        <p-button class="submit-btn" type="submit">Search</p-button>
+      </div>
+      <input type="text" pInputText/>
+      <input type="text" pInputText/>
+      <p-button class="btoo" type="submit">Submit</p-button>
+    </div>
+
+  </div>
+  <div class="right">
+    <img src="https://imagemagick.org/image/wizard.png" style="max-width:250px;max-height:250px;width:auto;height:auto;"/>
+  </div>
+</div>-->
+
+<form [formGroup]="addItemForm">
+  <div class="parent">
+    <div class="left">
+      <div class="inner">
+        <p-dropdown formControlName="store" [options]="storeConfigs" optionLabel="name" placeholder="Select a store" (onChange)="onStoreChange()"
+                    [style]="{'width':'100%','margin-bottom': '15px'}"></p-dropdown>
+        <div>
+          <input *ngIf="addItemForm.controls.store.value != null" type="text" placeholder="Item ID" pInputText formControlName="itemId"/>
+          <p-button *ngIf="addItemForm.controls.store.value != null && addItemForm.controls.itemId.value != null" class="btn-search" pRipple label="Search" (click)="getNewItemInfo()"></p-button>
+        </div>
+        <p-dropdown *ngIf="newItemInfo?.imageUrl != null && hasColorSize" formControlName="color" [options]="newItemInfo.metadata.colorSizes" optionLabel="color.name" placeholder="Select color"
+                    [style]="{'width':'100%','margin-bottom': '15px'}"></p-dropdown>
+        <p-dropdown *ngIf="addItemForm.controls.color.value != null" formControlName="size" [options]="getSizes()" optionLabel="size.name" placeholder="Select size"
+                    [style]="{'width':'100%','margin-bottom': '15px'}"></p-dropdown>
+        <input *ngIf="shouldShowPriceInput()" type="text" placeholder="Desired price" pInputText formControlName="price"/>
+        <p-button (onClick)="trackItem()" type="submit" [disabled]="!addItemForm.valid">Submit</p-button>
+      </div>
+    </div>
+    <div class="right">
+      <img *ngIf="newItemInfo" class='resize_fit_center' [src]="getimageUrl()" style="max-width:200px;max-height:230px;width:auto;height:auto;"/>
+    </div>
+  </div>
+</form>
+
+
+
+

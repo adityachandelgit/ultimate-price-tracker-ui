@@ -1,12 +1,20 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
+import {routes} from './app.routes';
 import {provideHttpClient} from "@angular/common/http";
+import {provideAnimations} from "@angular/platform-browser/animations";
+import {TrackItemComponent} from "./track-item/track-item.component";
+import {DialogService} from "primeng/dynamicdialog";
+import {MessageService} from "primeng/api";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    provideAnimations(),
+    TrackItemComponent,
+    DialogService,
+    MessageService
   ]
 };
