@@ -40,4 +40,8 @@ export class ItemService {
     });
   }
 
+  updatePrice(itemId: number, newPriceNumber: string) {
+    return this.http.put<Item>(environment.apiUrl + '/items/id/' + itemId + '/newPrice/' + newPriceNumber, {});
+  }
+
 }

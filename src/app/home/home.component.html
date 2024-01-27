@@ -44,8 +44,16 @@
       <td>
         <img src="{{statusIconMapping(item)}}" style="max-width:20px;max-height:20px;width:auto;height:auto;"/>
       </td>
-      <td>
-        ${{item.desiredPrice}}
+
+      <td [pEditableColumn]="item.desiredPrice" pEditableColumnField="desiredPrice">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" (keydown.enter)="saveNewPrice($event, item)" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ item.desiredPrice }}
+          </ng-template>
+        </p-cellEditor>
       </td>
       <td>
         <i [class]="getIcon(item)" [style]="getStyle(item)"></i>

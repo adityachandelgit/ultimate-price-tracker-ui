@@ -9,6 +9,9 @@ import {ToastModule} from "primeng/toast";
 import {ImageModule} from "primeng/image";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ItemPriceHistoryComponent} from "../item-price-history/item-price-history.component";
+import {FormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +21,9 @@ import {ItemPriceHistoryComponent} from "../item-price-history/item-price-histor
     DatePipe,
     SlicePipe,
     ToastModule,
-    ImageModule
+    ImageModule,
+    FormsModule,
+    InputTextModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -29,11 +34,11 @@ export class HomeComponent implements AfterViewInit {
   storeConfigs!: StoreConfig[];
   itemService: ItemService;
   apiConfigService: ApiConfigService;
-
   ref: DynamicDialogRef | undefined;
+  protected readonly parseInt = parseInt;
 
 
-  constructor(itemService: ItemService, apiConfigService: ApiConfigService, public dialogService: DialogService) {
+  constructor(itemService: ItemService, apiConfigService: ApiConfigService, public dialogService: DialogService, public messageService: MessageService) {
     this.apiConfigService = apiConfigService;
     this.itemService = itemService;
   }
@@ -84,11 +89,30 @@ export class HomeComponent implements AfterViewInit {
     return Math.round(((element.latestPrice - element.desiredPrice) / element.latestPrice) * 100);
   }
 
-  protected readonly parseInt = parseInt;
-
   goToLink(item: Item) {
     window.open(item.url, "_blank");
   }
 
+  saveNewPrice($event: any, item: Item) {
+    console.log(item)
+    let newPrice = ($event.target as HTMLInputElement).value;
+    if (!isNaN(Number(newPrice))) {
+      this.itemService.updatePrice(item.id, newPrice).subscribe(
+        {
+          next: (v: Item) => {
+            console.log(v)
+            let indexToUpdate = this.items.findIndex(i => i.id === item.id)
+            this.items[indexToUpdate] = v;
+            this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully updated item price'});
+          },
+          error: (e) => {
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to update item price'});
+          }
+        }
+      )
+    } else {
+      this.messageService.add({severity: 'error', summary: 'Error', detail: 'New price must be a number'});
+    }
+  }
 
 }
