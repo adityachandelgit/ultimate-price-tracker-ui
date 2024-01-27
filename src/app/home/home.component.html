@@ -51,7 +51,7 @@
             <input pInputText type="text" (keydown.enter)="saveNewPrice($event, item)" />
           </ng-template>
           <ng-template pTemplate="output">
-            {{ item.desiredPrice }}
+            ${{ item.desiredPrice }}
           </ng-template>
         </p-cellEditor>
       </td>

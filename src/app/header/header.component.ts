@@ -2,7 +2,6 @@ import {Component, OnDestroy} from '@angular/core';
 import {AvatarModule} from "primeng/avatar";
 import {MessageService, SharedModule} from "primeng/api";
 import {ToolbarModule} from "primeng/toolbar";
-import {RouterLink} from "@angular/router";
 import {TrackItemComponent} from "../track-item/track-item.component";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 
@@ -12,8 +11,7 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
   imports: [
     AvatarModule,
     SharedModule,
-    ToolbarModule,
-    RouterLink
+    ToolbarModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
