@@ -7,6 +7,7 @@ import {provideAnimations} from "@angular/platform-browser/animations";
 import {TrackItemComponent} from "./track-item/track-item.component";
 import {DialogService} from "primeng/dynamicdialog";
 import {MessageService} from "primeng/api";
+import 'chartjs-adapter-moment';
 
 export const appConfig: ApplicationConfig = {
   providers: [

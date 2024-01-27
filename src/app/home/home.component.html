@@ -36,9 +36,11 @@
         &nbsp; <i class="pi pi-external-link" (click)="goToLink(item)"></i>&nbsp;&nbsp;&nbsp;
       </td>
       <td style="padding:0">
-        <img [src]="item.imageUrl" style="width:40px;height:40px"/>
+        <p-image [src]="item.imageUrl" [preview]=true height="40px" width="40px"/>
       </td>
-      <td>{{item.name | slice:0:75 }}</td>
+      <td (click)="showPriceHistory(item)">
+        {{item.name | slice:0:75 }}
+      </td>
       <td>
         <img src="{{statusIconMapping(item)}}" style="max-width:20px;max-height:20px;width:auto;height:auto;"/>
       </td>

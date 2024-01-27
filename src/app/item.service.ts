@@ -4,6 +4,7 @@ import {Item} from "./models/Item";
 import {environment} from "../environments/environment";
 import {NewItemInfo} from "./models/NewItemInfo";
 import {AddItem} from "./models/AddItem";
+import {ItemHistory} from "./models/Item-History";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,13 @@ export class ItemService {
 
   getNewItemInfo(store: string, itemId: string) {
     return this.http.get<NewItemInfo>(environment.apiUrl + '/new-item-info/store/' + store + '/item/' + itemId);
+  }
+
+  getItemPriceHistory(itemId: number, store: string) {
+    return this.http.post<ItemHistory[]>(environment.apiUrl + '/price-history', {
+      'itemId': itemId,
+      'storeType': store
+    });
   }
 
 }

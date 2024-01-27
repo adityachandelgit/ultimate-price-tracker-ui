@@ -6,6 +6,9 @@ import {ApiConfigService} from "../api-config.service";
 import {Item} from "../models/Item";
 import {DatePipe, SlicePipe} from "@angular/common";
 import {ToastModule} from "primeng/toast";
+import {ImageModule} from "primeng/image";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {ItemPriceHistoryComponent} from "../item-price-history/item-price-history.component";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +17,8 @@ import {ToastModule} from "primeng/toast";
     TableModule,
     DatePipe,
     SlicePipe,
-    ToastModule
+    ToastModule,
+    ImageModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -26,7 +30,10 @@ export class HomeComponent implements AfterViewInit {
   itemService: ItemService;
   apiConfigService: ApiConfigService;
 
-  constructor(itemService: ItemService, apiConfigService: ApiConfigService) {
+  ref: DynamicDialogRef | undefined;
+
+
+  constructor(itemService: ItemService, apiConfigService: ApiConfigService, public dialogService: DialogService) {
     this.apiConfigService = apiConfigService;
     this.itemService = itemService;
   }
@@ -37,6 +44,15 @@ export class HomeComponent implements AfterViewInit {
     });
     this.itemService.getItems().subscribe((items: Item[]) => {
       this.items = items;
+    });
+  }
+
+  showPriceHistory(item: Item) {
+    this.ref = this.dialogService.open(ItemPriceHistoryComponent, {
+      data: item,
+      showHeader: false,
+      closable: true,
+      dismissableMask: true
     });
   }
 
@@ -73,4 +89,6 @@ export class HomeComponent implements AfterViewInit {
   goToLink(item: Item) {
     window.open(item.url, "_blank");
   }
+
+
 }

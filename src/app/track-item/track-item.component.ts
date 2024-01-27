@@ -10,7 +10,7 @@ import {RippleModule} from "primeng/ripple";
 import {ColorSizes, NewItemInfo, Size, SizePrices} from "../models/NewItemInfo";
 import {ItemService} from "../item.service";
 import {DialogModule} from "primeng/dialog";
-import {DynamicDialogRef} from "primeng/dynamicdialog";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AddItem, Metadata} from "../models/AddItem";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {MessageService} from "primeng/api";
