@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
@@ -7,12 +7,11 @@ import {StoreConfig} from "../models/StoreConfig";
 import {NgIf} from "@angular/common";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
-import {ColorSizes, NewItemInfo, Size, SizePrices} from "../models/NewItemInfo";
+import {ItemOptions, NewItemInfo, SizePrices} from "../models/NewItemInfo";
 import {ItemService} from "../item.service";
 import {DialogModule} from "primeng/dialog";
-import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
-import {AddItem, Metadata} from "../models/AddItem";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {DynamicDialogRef} from "primeng/dynamicdialog";
+import {AddItem} from "../models/AddItem";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 
@@ -41,7 +40,7 @@ export class TrackItemComponent implements AfterViewInit {
   addItemForm = new FormGroup({
     store: new FormControl<StoreConfig | null>(null, Validators.required),
     itemId: new FormControl<string | null>(null, Validators.required),
-    color: new FormControl<ColorSizes | null>(null),
+    color: new FormControl<ItemOptions | null>(null),
     size: new FormControl<SizePrices | null>(null),
     price: new FormControl<number | null>(null, [
       Validators.required,
@@ -98,14 +97,14 @@ export class TrackItemComponent implements AfterViewInit {
     let store = this.addItemForm.controls.store.value as StoreConfig;
     this.itemService.getNewItemInfo(store.enumName, this.addItemForm.controls.itemId.value as string).subscribe((newItemInfo: NewItemInfo) => {
       this.newItemInfo = newItemInfo;
-      this.hasColorSize = newItemInfo.metadata.colorSizes != null;
+      this.hasColorSize = newItemInfo.options != null;
     });
   }
 
   getSizes() {
-    let colorSizes = this.addItemForm.controls.color.getRawValue();
-    return this.newItemInfo.metadata.colorSizes
-      .filter(x => x.color.id == colorSizes?.color.id)
+    let itemOptions = this.addItemForm.controls.color.value;
+    return this.newItemInfo.options
+      .filter(x => x.color.id == itemOptions?.color.id)
       .flatMap(y => y.sizePrices);
   }
 

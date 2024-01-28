@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TableModule} from "primeng/table";
 import {ItemService} from "../item.service";
 import {StoreConfig} from "../models/StoreConfig";
@@ -28,7 +28,7 @@ import {MessageService} from "primeng/api";
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements OnInit {
 
   items!: Item[];
   storeConfigs!: StoreConfig[];
@@ -43,7 +43,7 @@ export class HomeComponent implements AfterViewInit {
     this.itemService = itemService;
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.apiConfigService.getStoresConfig().subscribe((storeConfigs: StoreConfig[]) => {
       this.storeConfigs = storeConfigs;
     });
@@ -114,5 +114,6 @@ export class HomeComponent implements AfterViewInit {
       this.messageService.add({severity: 'error', summary: 'Error', detail: 'New price must be a number'});
     }
   }
+
 
 }

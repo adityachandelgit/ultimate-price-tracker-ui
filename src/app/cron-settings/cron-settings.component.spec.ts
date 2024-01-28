@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingsComponent } from './settings.component';
+import { CronSettingsComponent } from './cron-settings.component';
 
-describe('SettingsComponent', () => {
-  let component: SettingsComponent;
-  let fixture: ComponentFixture<SettingsComponent>;
+describe('CronSettingsComponent', () => {
+  let component: CronSettingsComponent;
+  let fixture: ComponentFixture<CronSettingsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SettingsComponent]
+      imports: [CronSettingsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SettingsComponent);
+    fixture = TestBed.createComponent(CronSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

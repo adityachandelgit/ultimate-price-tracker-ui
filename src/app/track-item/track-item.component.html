@@ -49,7 +49,7 @@
           <input *ngIf="addItemForm.controls.store.value != null" type="text" placeholder="Item ID" pInputText formControlName="itemId"/>
           <p-button *ngIf="addItemForm.controls.store.value != null && addItemForm.controls.itemId.value != null" class="btn-search" pRipple label="Search" (click)="getNewItemInfo()"></p-button>
         </div>
-        <p-dropdown *ngIf="newItemInfo?.imageUrl != null && hasColorSize" formControlName="color" [options]="newItemInfo.metadata.colorSizes" optionLabel="color.name" placeholder="Select color"
+        <p-dropdown *ngIf="newItemInfo?.imageUrl != null && hasColorSize" formControlName="color" [options]="newItemInfo.options" optionLabel="color.name" placeholder="Select color"
                     [style]="{'width':'100%','margin-bottom': '15px'}"></p-dropdown>
         <p-dropdown *ngIf="addItemForm.controls.color.value != null" formControlName="size" [options]="getSizes()" optionLabel="size.name" placeholder="Select size"
                     [style]="{'width':'100%','margin-bottom': '15px'}"></p-dropdown>

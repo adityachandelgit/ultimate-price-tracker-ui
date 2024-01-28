@@ -4,12 +4,14 @@
   </ng-template>
   <ng-template pTemplate="center">
     <div class="flex flex-wrap align-items-center gap-3">
-      <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-home text-3xl"></i></button>
-      <button (click)="show()" class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-plus-circle text-3xl"></i></button>
-      <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-cog text-3xl"></i></button>
-    </div>
+      <!--<button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-home text-3xl"></i></button>
+      --><button (click)="show()" class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-plus-circle text-3xl"></i></button>
+      </div>
   </ng-template>
   <ng-template pTemplate="end">
-    <div></div>
+    <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i class="pi pi-cog text-3xl"></i></button>
   </ng-template>
 </p-toolbar>
+<p-speedDial showIcon="false" [model]="items" direction="down" type="linear" class="speeddial">
+
+</p-speedDial>

@@ -1,0 +1,44 @@
+<p-table [value]="crons" dataKey="jobName" editMode="row" styleClass="p-datatable-sm">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width:40%">Store</th>
+      <th style="width:30%">Cron</th>
+      <th style="width:20%">Enabled</th>
+      <th style="width:10%"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-cron let-editing="editing" let-ri="rowIndex">
+    <tr [pEditableRow]="cron">
+      <td>
+        {{cron.jobName}}
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="cron.cron" required>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{cron.cron}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <p-dropdown [options]="getCronEnabledOptions()" appendTo="body" [(ngModel)]="cron.enabled" [style]="{'width':'100%'}"></p-dropdown>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{cron.enabled}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <div class="flex align-items-center justify-content-center gap-2">
+          <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(cron)" class="p-button-rounded p-button-text"></button>
+          <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(cron, ri)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+          <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(cron, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

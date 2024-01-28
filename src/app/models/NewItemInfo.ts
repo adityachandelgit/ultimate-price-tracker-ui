@@ -1,17 +1,12 @@
 export interface NewItemInfo {
-  /*itemId: string;
-  store: string;*/
   imageUrl: string | null;
-  metadata: Metadata;
+  options: ItemOptions[];
 }
 
-export interface Metadata {
-  colorSizes: ColorSizes[]
-}
-
-export interface ColorSizes {
+export interface ItemOptions {
   color: Color
   sizePrices: SizePrices[]
+  imageUrl: string
 }
 
 export interface Color {
