@@ -95,10 +95,21 @@ export class TrackItemComponent implements AfterViewInit {
 
   getNewItemInfo() {
     let store = this.addItemForm.controls.store.value as StoreConfig;
-    this.itemService.getNewItemInfo(store.enumName, this.addItemForm.controls.itemId.value as string).subscribe((newItemInfo: NewItemInfo) => {
-      this.newItemInfo = newItemInfo;
-      this.hasColorSize = newItemInfo.options != null;
-    });
+    this.itemService.getNewItemInfo(store.enumName, this.addItemForm.controls.itemId.value as string).subscribe(
+      {
+        next: (newItemInfo) => {
+          this.newItemInfo = newItemInfo;
+          this.hasColorSize = newItemInfo.options != null;
+        },
+        error: (e) => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to search item'});
+        },
+        complete: () => {
+
+        }
+      }
+
+    );
   }
 
   getSizes() {

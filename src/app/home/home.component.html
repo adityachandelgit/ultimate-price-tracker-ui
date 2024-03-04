@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-<p-table [value]="items" [tableStyle]="{'min-width': '60rem'}" styleClass="p-datatable-sm">
+<p-table [value]="items" sortField="priceDiffPercent" [tableStyle]="{'min-width': '60rem'}" styleClass="p-datatable-sm">
   <ng-template pTemplate="header">
     <tr>
       <th>
@@ -22,11 +22,11 @@
       <th pSortableColumn="latestPriceTimestamp">Last Price Update
         <p-sortIcon field="latestPriceTimestamp"></p-sortIcon>
       </th>
-      <th pSortableColumn="latestPriceTimestamp">% Diff
-        <p-sortIcon field="latestPriceTimestamp"></p-sortIcon>
+      <th pSortableColumn="priceDiffPercent">% Diff
+        <p-sortIcon field="priceDiffPercent"></p-sortIcon>
       </th>
-      <th pSortableColumn="latestPriceTimestamp">$ Diff
-        <p-sortIcon field="latestPriceTimestamp"></p-sortIcon>
+      <th pSortableColumn="priceDiffAmount">$ Diff
+        <p-sortIcon field="priceDiffAmount"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
@@ -63,10 +63,10 @@
         {{item.latestPriceTimestamp * 1000 | date: 'h:mm a, dd/MM/YY'}}
       </td>
       <td>
-        {{calculatePercentage(item)}}%
+        {{item.priceDiffPercent}}%
       </td>
       <td>
-        ${{parseInt(item.latestPrice) - parseInt(item.desiredPrice)}}
+        ${{item.priceDiffAmount}}
       </td>
     </tr>
   </ng-template>

@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
       this.storeConfigs = storeConfigs;
     });
     this.itemService.getItems().subscribe((items: Item[]) => {
+      this.addFields(items)
       this.items = items;
     });
   }
@@ -85,10 +86,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  calculatePercentage(element: Item) {
-    return Math.round(((element.latestPrice - element.desiredPrice) / element.latestPrice) * 100);
-  }
-
   goToLink(item: Item) {
     window.open(item.url, "_blank");
   }
@@ -116,4 +113,10 @@ export class HomeComponent implements OnInit {
   }
 
 
+  private addFields(items: Item[]) {
+    items.map(x => {
+      x.priceDiffPercent = Math.round(((x.latestPrice - x.desiredPrice) / x.latestPrice) * 100);
+      x.priceDiffAmount = Math.round(x.latestPrice - x.desiredPrice);
+    })
+  }
 }

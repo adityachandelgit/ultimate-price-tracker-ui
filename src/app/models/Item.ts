@@ -9,5 +9,7 @@ export interface Item {
   url: string,
   imageUrl: string,
   trackingEnabled: boolean,
-  priceTrend: string
+  priceTrend: string,
+  priceDiffPercent: number,
+  priceDiffAmount: number,
 }

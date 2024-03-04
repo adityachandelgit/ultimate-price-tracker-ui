@@ -30,7 +30,10 @@ export class ItemService {
   }
 
   getNewItemInfo(store: string, itemId: string) {
-    return this.http.get<NewItemInfo>(environment.apiUrl + '/new-item-info/store/' + store + '/item/' + itemId);
+    return this.http.post<NewItemInfo>(environment.apiUrl + '/new-item-info', {
+      'store': store,
+      'itemId': itemId
+    });
   }
 
   getItemPriceHistory(itemId: number, store: string) {
