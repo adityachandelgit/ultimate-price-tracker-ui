@@ -119,4 +119,18 @@ export class HomeComponent implements OnInit {
       x.priceDiffAmount = Math.round(x.latestPrice - x.desiredPrice);
     })
   }
+
+  deleteItem(item: Item) {
+    this.itemService.deleteItem(item.id).subscribe(
+      {
+        next: () => {
+          this.items = this.items.filter(i => i.id != item.id);
+          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Successfully deleted item'});
+        },
+        error: () => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to delete item'});
+        }
+      }
+    )
+  }
 }

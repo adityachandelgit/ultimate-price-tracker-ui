@@ -28,6 +28,9 @@
       <th pSortableColumn="priceDiffAmount">$ Diff
         <p-sortIcon field="priceDiffAmount"></p-sortIcon>
       </th>
+      <th>
+        Delete
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
@@ -68,6 +71,7 @@
       <td>
         ${{item.priceDiffAmount}}
       </td>
+      <td style="text-align: center; color: red " ><i class="pi pi-trash" (click)="deleteItem(item)"></i></td>
     </tr>
   </ng-template>
 </p-table>
